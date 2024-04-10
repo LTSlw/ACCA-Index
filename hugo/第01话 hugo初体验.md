@@ -8,7 +8,7 @@ tags:
 - web
 - server
 date: 2024-03-08
-lastmod: 2024-03-09
+lastmod: 2024-04-10
 ---
 
 # hugo初体验
@@ -17,9 +17,9 @@ lastmod: 2024-03-09
 
 本话会指引你生成一个简单的hugo站点，包含了hugo创建站点的基本流程，说不定你也可以猜到hugo的工作原理和设定
 
-## 创建新的站点
+## 创建Site
 
-创建站点可以使用`hugo new site`命令，例如：
+`site`在hugo中是站点的意思，整个网站都是一个站点，创建site可以使用`hugo new site`命令，例如：
 
 ``` shell
 hugo new site test-site
@@ -52,17 +52,17 @@ draft: true
 
 > 茵蒂克丝：front matter也可以使用`hugo convert toYAML -o .`命令转换
 
-## 配置站点
+## 配置site
 
-可以在`hugo.yaml`中配置站点，可以看到hugo已经帮我们生成了一部分配置
+可以在`hugo.yaml`中配置site，可以看到hugo已经帮我们生成了一部分配置
 
 - `baseURL`：站点url前缀，这里要填写这个网站之后会绑定到的域名
 - `languageCode`：由[RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646)定义的语言标识，`en-us`表示英文-美国，`zh-cn`表示中文-中国
 - `title`：站点标题
 
-## 安装主题
+## 安装theme
 
-首先需要找到一个主题，在[官网](https://themes.gohugo.io/)或其他地方有已经做好的各种主题
+`theme`是主题的意思，一个主题可以包含整个site的样式，决定了整个site的外观，在[官网](https://themes.gohugo.io/)或其他地方有已经做好的各种主题
 
 个人推荐使用hugo mudule管理主题，也可以用git submodule或者将主题整个放在主题同名文件夹里再放到themes文件夹下。下面是使用hugo mudule安装[hyde](https://github.com/spf13/hyde)主题的例子
 
@@ -78,9 +78,9 @@ module:
   - path: github.com/theNewDynamic/gohugo-theme-ananke
 ```
 
-## 添加页面
+## 添加content
 
-添加页面可以使用`hugo new content`命令，例如：
+每个页面都是一个`content`，添加页面可以使用`hugo new content`命令，例如：
 
 ``` shell
 hugo new content posts/my-first-post.md
@@ -88,9 +88,9 @@ hugo new content posts/my-first-post.md
 
 这条命令会创建`content/posts/my-first-post.md`，最开头有一段自动生成的front matter，可以在后面用一般的markdown语法编写正文
 
-## 预览页面
+## 预览site
 
-预览页面可以使用`hugo server`命令，浏览器打开`http://127.0.0.1:1313`可以看到首页，但上面没有`my-first-post`页面，怎么回事呢？
+预览site可以使用`hugo server`命令，浏览器打开`http://127.0.0.1:1313`可以看到首页，但上面没有`my-first-post`页面，怎么回事呢？
 
 回到`content/posts/my-first-post.md`，在front matter中把`draft`的值改为`false`，保存
 
@@ -100,7 +100,7 @@ hugo new content posts/my-first-post.md
 
 > 茵蒂克丝：hugo server在运行时会检测文件修改，大部分情况下，你不需要重新运行hugo server，刷新页面就能看到最近的更改
 
-## 构建站点
+## 构建site
 
 虽然`hugo server`已经是一个性能很好的web服务器了，但还是有必要把站点构建之后作为静态页面部署到服务器上，一方面功能更加强大，另一方便也更加安全
 
