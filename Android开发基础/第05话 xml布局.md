@@ -9,6 +9,8 @@ lastmod: 2024-04-25
 
 # xml布局
 
+减少布局嵌套可以提高渲染速度，降低复杂性（扁平化），推荐使用ConstraintLayout
+
 ## Android控件
 
 所有的Android控件的基类都是`View`，其中有一个子类`ViewGroup`可以嵌套其他的`View`和`ViewGroup`以实现布局
@@ -19,6 +21,32 @@ lastmod: 2024-04-25
 
 - View支持padding，但是不支持margin
 - ViewGroup支持padding和margin
+
+### 对齐方式
+
+控制控件的对齐方式可以由以下的属性控制
+
+- `layout_gravity`：该控件与上级级控件的对齐方式
+- `gravity`：布局内部子控件对齐与排列方式
+
+它们可以包含下列值的一个或多个
+
+- `top`
+- `bottom`
+- `start`
+- `end`
+- `right`
+- `left`
+- `center`
+- `fill`
+- `fill_horizontal`
+- `fill_vertical`
+- `clip_horizontal`
+- `clip_vertical`
+- `center_horizontal`
+- `center_vertical`
+
+`start`/`end`和`left`/`right`的区别是，文字从右向左（RTL）书写语言，会以`right`为`start`，`left`为`end`
 
 ## 布局单位
 
@@ -34,18 +62,18 @@ lastmod: 2024-04-25
 
 ### 预定义颜色
 
-- BLACK
-- BLUE
-- CYAN
-- DKGRAY
-- GRAY
-- GREEN
-- LTGRAY
-- MEGENTA
-- RED
-- TRANSPARENT
-- WHITE
-- YELLOW
+- `BLACK`
+- `BLUE`
+- `CYAN`
+- `DKGRAY`
+- `GRAY`
+- `GREEN`
+- `LTGRAY`
+- `MEGENTA`
+- `RED`
+- `TRANSPARENT`
+- `WHITE`
+- `YELLOW`
 
 ### 十六进制表示
 
@@ -71,6 +99,28 @@ import android.graphics.Color
 - `Component Tree`：控件列表
 
 > 调整控件宽高时除了指定dp值，还可以使用`wrap_content`和`match_parent`，分别表示恰好包裹content和填充父控件
+
+## LinearLayout
+
+`LinearLayout`，线性布局，内部的控件按照某种顺序排列（水平或垂直）。多个LinearLayout相互嵌套可以实现多个方向的布局
+
+- `layout_weight`：调整控件占LinearLayout的比例
+
+## RelativeLayout
+
+通过指定特定控件相对于其他控件（兄弟控件或父级控件）的相对位置来布局
+
+## TableLayout
+
+表格式布局，把包含的子控件以行和列的形式进行排列，表格的列数为每一行的最大列数。TableRow代表一行，每行可以包含一个或多个Cell，每个Cell放置一个View控件
+
+可以调整列缩放或者让控件占据多个列调整比例
+
+## FrameLayout
+
+无法为子控件指定精确的位置，依靠`layout_gravity`控制布局
+
+> 常见用法是作为Fragment的容器
 
 ## 使用代码创建控件
 
