@@ -48,6 +48,14 @@ lastmod: 2024-04-27
 
 `start`/`end`和`left`/`right`的区别是，文字从右向左（RTL）书写语言，会以`right`为`start`，`left`为`end`
 
+### visibility
+
+控制控件显隐，允许以下的值
+
+- `gone`：隐藏控件，且控件不占用屏幕空间
+- `invisible`：隐藏控件，但控件依然占用空间
+- `visible`：显示控件
+
 ## 布局单位
 
 ### Density-independent pixels
@@ -99,6 +107,22 @@ import android.graphics.Color
 - `Component Tree`：控件列表
 
 > 调整控件宽高时除了指定dp值，还可以使用`wrap_content`和`match_parent`，分别表示恰好包裹content和填充父控件
+
+### tools前缀
+
+Design中显示的布局可能和实际不一样，`tools`前缀的属性不会在最终的程序中显示出来，但会被Design使用，方便设计
+
+``` xml
+<Button
+    android:id="@+id/button2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button"
+    tools:layout_editor_absoluteX="18dp"
+    tools:layout_editor_absoluteY="80dp" />
+```
+
+这个Button在Design中会显示在屏幕中间，但由于没有约束，实际运行会显示在左上角
 
 ## ConstraintLayout
 
