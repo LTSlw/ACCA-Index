@@ -4,7 +4,7 @@ author:
 tags:
 - android
 date: 2024-04-25
-lastmod: 2024-04-25
+lastmod: 2024-04-27
 ---
 
 # xml布局
@@ -99,6 +99,95 @@ import android.graphics.Color
 - `Component Tree`：控件列表
 
 > 调整控件宽高时除了指定dp值，还可以使用`wrap_content`和`match_parent`，分别表示恰好包裹content和填充父控件
+
+## ConstraintLayout
+
+Constraint（约束），代表父子（或兄弟）控件之间的连接或对齐方式。每个控件，都可以设置上下左右四个方向的constraint
+
+constraint可以在`Attributes`中的`Constraint Widget`设置和查看
+
+![](imgs/05_01_constraint_widget.png)
+
+也可以在设计窗口中点击白色圆圈设置
+
+![](imgs/05_02_set_constraints_in_design.png)
+
+### default margins
+
+默认的页边距，点击上方的按钮调整
+
+![](imgs/05_03_default_margins.png)
+
+### constraint
+
+constraint有3种，可以单击Constraint Widget中4个圆点内侧的按钮切换（鼠标悬停会显示当前constraint类型），外侧的数字为固定保留的空白大小，点击圆点删除constraint
+
+- `Fixed`（![](imgs/05_04_fixed.png)）：固定大小（少用）
+- `Match Constrains`（![](imgs/05_05_match_constraints.png)）：在满足约束的情况下使控件填充尽可能大的空间
+- `Warp Content`（![](imgs/05_06_warp_content.png)，默认）：包裹content的情况下占用尽可能小的空间
+
+### bias
+
+分为水平（`Horizontal Bias`）和垂直（`Vertical Bias`）两种，控件在约束的范围内可能不足以确定它的位置，bias表示控件在可能范围内左右和上下的百分比（示例图中显示`66`的滑块），默认值都为`50`，即在可能的范围内居中
+
+### raito
+
+设定控件的长宽比，点击Constraint Widget中左上角的小三角，然后在右下角的raito中输入长宽比。某些constrains设置可能会导致不能设置raito，这时小三角也不会显示
+
+> 可以用于设置图片控件的长宽比为16:9，以保证显示的图片不变形
+
+### 基线对齐
+
+右键需要基线对齐的控件，点击`Show Baseline`，把需要对齐的控件的基线用鼠标拖动连接起来
+
+### Guideline
+
+引导线可以用于对齐控件，只需把控件的constraint连接到guideline即可。guideline可以在`Palette`中的`Helpers`中添加
+
+![](imgs/05_07_helpers.png)
+
+### barrier
+
+障碍，和guideline有类似之处，区别是barrier不是固定的，可以相对与一些控件移动。barrier比较重要的属性是`constraint_referenced_ids`（barrier参考的控件的id）和`barrierDirection`（barrier的方向）
+
+`constraint_referenced_ids`可以在`Component Tree`中把参考的控件拖动到barrier下
+
+![](imgs/05_09_barrier.png)
+
+`barrierDirection`允许以下的值：`top`、`bottom`、`start`、`end`、`left`、`right`，表示barrier在参考的控件的什么方向，比如`bottom`就表示barrier会出现在这些控件的下方
+
+### group
+
+控件组，可以在Helpers中添加组，控件组中的控件可以整组控制，比如控制显示和隐藏
+
+### chain
+
+约束链可以把多个控件水平或垂直约束在一起，比如多个控件并排居中，用约束链就非常简单。创建chain可以选中要创建chain的控件，右键 -> `Chains` -> `Create Chain`。之后可以在右键 -> `Chains` -> `Chain Style`中修改chain模式，chain共有3种模式：
+
+- `spread`：被chain连接的控件均匀分布，在chain两端留有均匀的空白
+- `spread_inside`：被chain连接的控件均匀分布，整个chain在满足constraint的情况下占用尽可能大的空间
+- `packed`：被chain连接的控件之间的距离尽可能短
+
+### flow
+
+流式布局，超出一行的控件会自动转移到下一行，flow可以在Helpers中添加，和flow有关比较重要的的参数有以下几个
+
+- `orientation`：控件首选的排列方向，可能的值为`horizontal`（水平）和`vertical`（垂直）（下面的内容默认使用水平排列，垂直排列自行把“行”替换为“列”理解）
+- `flow_wrapMode`：flow的方式，可能的值为：`none`（内部的控件排列为一行，相当于创建了一个chain），`chain`（超出范围的控件换行，相当于创建了多条chain），`aligned`（在chain的基础上会对齐控件）
+- `flow_maxElementsWrap`：一行的最大控件数量
+- `flow_horizontalGap`/`flow_verticalGap`：控件之间水平和垂直的间隔
+- `flow_horizontalAlign`/`flow_verticalAlign`：控件之间水平和垂直的对齐方式
+- `flow_horizontalStyle`/`flow_verticalStyle`：水平和垂直的flow方式，可能的值为`spread`、`spread_inside`、`packed`语义和chain中的介绍一致
+
+#### 加权
+
+当chain上的控件在chain的方向上的约束是Match Constrains时，可以给控件加权调整它占用的空间大小，具体调整的属性是`layout_constraintHorizontal_weight`和`layout_constraintVertical_weight`，控件会按照比例占用链上的空间
+
+### 自动推断约束
+
+把控件拖动到差不多的位置之后，选中并按`Infer Constraints`可以自动添加约束
+
+![](imgs/05_08_infer_constraints.png)
 
 ## LinearLayout
 
