@@ -17,6 +17,8 @@ lastmod: 2024-04-25
 
 `AndroidManifest.xml`记录了app的基本信息，包括应用的图标、权限、Acticity等
 
+[AndroidManifest.xml](https://developer.android.com/guide/topics/manifest/manifest-intro)
+
 ## kotlin+java
 
 包含了实际的kotlin代码，也就是说应用的计算大部分都包含在这里
