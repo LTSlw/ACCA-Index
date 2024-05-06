@@ -159,9 +159,15 @@ Task，每个应用都有一个task，多个activity以栈的结构存放在其�
 
 所有的activity都要在`AndroidManifest.xml`中注册，activity只有一个必须的属性`android:name`，对应activity的类名
 
+### 导出activity
+
+只有导出的activity才能从外部主动访问，通过设置`android:exported`可以控制activity是否被导出（`true`/`false`）
+
+**出于安全的考虑，应尽量避免导出activity**
+
 ### 设置入口点
 
-应用程序入口的activity应有属性`android:exported="true"`，并包含以下的\<intent-fliter\>，如果有多个activity包含他，那么第一个包含的activity会被启动
+应用程序入口的activity必须设置属性`android:exported="true"`，并包含以下的\<intent-fliter\>，如果有多个activity包含他，那么第一个包含的activity会被启动
 
 ``` xml
 <intent-filter>
@@ -257,7 +263,7 @@ Activity Result API使用`registerForActivityResult()`注册回调。函数接�
 下面是一个简单的例子
 
 ``` kotlin
-// 使用StartActivityForResult创建launcher
+// 使用registerForActivityResult创建launcher
 val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
     if (result.resultCode == Activity.RESULT_OK) { // 如果成功
         // 执行点什么……
