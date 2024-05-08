@@ -5,10 +5,10 @@ author:
 tags:
 - android
 date: 2024-02-21
-lastmod: 2024-04-24
+lastmod: 2024-05-09
 ---
 
-# 第1话 安装Android Studio
+# 安装Android Studio
 
 `Android Studio`是Android官方推出的IDE，用于Android开发，被广泛使用。绝大部分工作都可以在里面完成，比如编写代码、设计UI、构建应用、模拟不同的设备调试
 
@@ -227,3 +227,21 @@ Android Studio基于IDEA，IDEA是有中文支持的，但IDEA的版本需要和
 ### Run app时虚拟机没反应
 
 *检查虚拟机是否真的收到了app，目前一个比较玄学的原因是因为连接BIT-mobile无线网时就是传不过去*
+
+## 替换启动图
+
+*这不是受到官方支持的功能，我自行摸索得到，不一定在以后的版本也可用*
+
+启动图存放位置：`lib/resources.jar`
+
+`jar`实质上是zip压缩包，我们替换掉其中的`/artwork/studio_splash*.png`即可
+
+![](imgs/01_02_resources.png)
+
+Android Studio预置的启动图为`16:10`，`2x`的大小是另一个的两倍，自制的启动图也可以按照这个规格制作
+
+![](imgs/01_03_studio_splash.png)
+
+我制作的一个启动图（图源：[Pixiv@竹ちょ](https://www.pixiv.net/artworks/118523864)）：
+
+![](imgs/01_04_sample_splash.png)
